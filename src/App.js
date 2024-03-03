@@ -7,7 +7,7 @@ import NotFound from "./components/NotFound";
 
 const App = () => {
   return (
-    <div className=" text-gray-500 bg-blue-500">
+    <div>
       <BrowserRouter>
         <Navbar />
         <Routes>
