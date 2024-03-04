@@ -3,16 +3,18 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import productsReducer from "./components/features/productsSlice";
+import { productsFetch } from "./components/features/productsSlice";
 
 export const store = configureStore({
   reducer: {
     products: productsReducer,
   },
 });
+
+store.dispatch(productsFetch());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
