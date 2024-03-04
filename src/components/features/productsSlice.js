@@ -9,9 +9,13 @@ const initialState = {
 
 export const productsFetch = createAsyncThunk(
   "products/productsFetch",
-  async () => {
-    const response = await axios.get("https://fakestoreapi.com/products");
-    return response?.data;
+  async (id = null, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("https://fakestoreapi.com/productss");
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue("invalid response");
+    }
   }
 );
 
@@ -27,6 +31,7 @@ export const productsSlice = createSlice({
       })
       .addCase(productsFetch.rejected, (state, action) => {
         state.status = "rejected";
+        state.error = action.payload;
       })
       .addCase(productsFetch.pending, (state, action) => {
         state.status = "waiting";
