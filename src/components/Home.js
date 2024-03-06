@@ -1,9 +1,17 @@
 import React from "react";
+import { addToCart } from "./features/cartSlice";
+import { UseDispatch, useDispatch } from "react-redux";
 import { useGetProductsApiByNameQuery } from "./features/productsApi";
 
 const Home = () => {
   const { data, error, isLoading } = useGetProductsApiByNameQuery();
   console.log(data, "data");
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <div className=" py-8 px-16">
       {error ? (
@@ -30,7 +38,10 @@ const Home = () => {
                   <span>{product.description.substring(0, 15)}</span>
                   <span className=" text-xl">${product.price}</span>
                 </div>
-                <button className=" w-full h-10 rounded-lg mt-8 cursor-pointer bg-[#4b70e2] hover:bg-[#5a67e0] text-white">
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className=" w-full h-10 rounded-lg mt-8 cursor-pointer bg-[#4b70e2] hover:bg-[#5a67e0] text-white"
+                >
                   Add to cart
                 </button>
               </div>
